@@ -1,160 +1,125 @@
 <template>
   <div class="register-wrapper">
-    <div class="register-container">
-      <h2>Register</h2>
-      <form @submit.prevent="handleRegister" class="register-form">
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" id="name" v-model="name" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="email" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="password" required />
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number:</label>
-          <input type="tel" id="phone" v-model="phone" required />
-        </div>
-        <div class="form-group">
-          <label>Are you a:</label>
-          <div class="radio-group">
-            <div>
+    <div class="register-content">
+      <!-- Left Pane with Optimized Image Size -->
+      <div class="left-pane">
+        <img src="/img/common/profile_bg.webp" alt="Registration Image" />
+      </div>
+
+      <!-- Right Pane with Scrollable Form -->
+      <div class="right-pane">
+        <div class="form-container">
+          <h2>Register</h2>
+          <form @submit.prevent="handleRegister" class="register-form">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" v-model="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" v-model="email" required />
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
               <input
-                type="radio"
-                id="student"
-                value="student"
-                v-model="userType"
+                type="password"
+                id="password"
+                v-model="password"
+                required
               />
-              <label for="student">Student</label>
             </div>
-            <div>
-              <input
-                type="radio"
-                id="professional"
-                value="professional"
-                v-model="userType"
-              />
-              <label for="professional">Professional</label>
+            <div class="form-group">
+              <label for="phone">Phone Number:</label>
+              <input type="tel" id="phone" v-model="phone" required />
             </div>
-          </div>
+            <div class="form-group">
+              <label>Are you a:</label>
+              <div class="radio-group">
+                <div>
+                  <input
+                    type="radio"
+                    id="student"
+                    value="student"
+                    v-model="userType"
+                  />
+                  <label for="student">Student</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="professional"
+                    value="professional"
+                    v-model="userType"
+                  />
+                  <label for="professional">Professional</label>
+                </div>
+              </div>
+            </div>
+            <div v-if="userType === 'professional'" class="form-group">
+              <div class="flex-row">
+                <div class="flex-item">
+                  <label for="companyName">Company Name:</label>
+                  <input type="text" id="companyName" v-model="companyName" />
+                </div>
+                <div class="flex-item">
+                  <label for="designation">Designation:</label>
+                  <input type="text" id="designation" v-model="designation" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Social Links:</label>
+              <div class="flex-row">
+                <div class="flex-item">
+                  <label for="linkedin">LinkedIn:</label>
+                  <input type="url" id="linkedin" v-model="linkedin" />
+                </div>
+                <div class="flex-item">
+                  <label for="github">GitHub:</label>
+                  <input type="url" id="github" v-model="github" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="website">Other Website:</label>
+              <input type="url" id="website" v-model="website" />
+            </div>
+            <button type="submit">Register</button>
+          </form>
+          <p class="redirect-link">
+            Already registered?
+            <a href="/auth/login">Login here</a>
+          </p>
+          <p v-if="error" class="error-message">{{ error }}</p>
         </div>
-        <div v-if="userType === 'professional'" class="form-group">
-          <div class="flex-row">
-            <div class="flex-item">
-              <label for="companyName">Company Name:</label>
-              <input type="text" id="companyName" v-model="companyName" />
-            </div>
-            <div class="flex-item">
-              <label for="designation">Designation:</label>
-              <input type="text" id="designation" v-model="designation" />
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Social Links:</label>
-          <div class="flex-row">
-            <div class="flex-item">
-              <label for="linkedin">LinkedIn:</label>
-              <input type="url" id="linkedin" v-model="linkedin" />
-            </div>
-            <div class="flex-item">
-              <label for="github">GitHub:</label>
-              <input type="url" id="github" v-model="github" />
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="website">Other Website:</label>
-          <input type="url" id="website" v-model="website" />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-      <p class="redirect-link">
-        Already registered?
-        <a href="/auth/login">Login here</a>
-      </p>
-      <p v-if="error" class="error-message">{{ error }}</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { auth } from "@/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-
 export default {
-  name: "Register",
-  setup() {
-    const router = useRouter();
-    const name = ref("");
-    const email = ref("");
-    const password = ref("");
-    const phone = ref("");
-    const userType = ref("student");
-    const companyName = ref("");
-    const designation = ref("");
-    const linkedin = ref("");
-    const github = ref("");
-    const website = ref("");
-    const error = ref(null);
-    const db = getFirestore();
-
-    const handleRegister = async () => {
-      try {
-        // Register user with Firebase Authentication
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email.value,
-          password.value
-        );
-        const user = userCredential.user;
-
-        // Add user details to Firestore
-        await addDoc(collection(db, "users"), {
-          uid: user.uid,
-          name: name.value,
-          email: email.value,
-          phone: phone.value,
-          userType: userType.value,
-          companyName:
-            userType.value === "professional" ? companyName.value : null,
-          designation:
-            userType.value === "professional" ? designation.value : null,
-          linkedin: linkedin.value,
-          github: github.value,
-          website: website.value,
-          createdAt: new Date(),
-        });
-
-        console.log("User registered and added to Firestore:", user);
-        router.push("/auth/login");
-      } catch (err) {
-        error.value = err.message;
-        console.error("Error registering user:", err);
-      }
-    };
-
+  data() {
     return {
-      name,
-      email,
-      password,
-      phone,
-      userType,
-      companyName,
-      designation,
-      linkedin,
-      github,
-      website,
-      error,
-      handleRegister,
+      name: "",
+      email: "",
+      password: "",
+      phone: "",
+      userType: "",
+      companyName: "",
+      designation: "",
+      linkedin: "",
+      github: "",
+      website: "",
+      error: "",
     };
+  },
+  methods: {
+    handleRegister() {
+      // Implement registration logic here
+      console.log("Registering user:", this.name, this.email);
+      // Add API call or Vuex action to handle registration
+    },
   },
 };
 </script>
@@ -165,23 +130,51 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url("public/img/common/profile_bg.webp") center/cover no-repeat;
   padding: 20px;
   box-sizing: border-box;
+  /* background-color: #f4f4f9; */
 }
 
-.register-container {
+.register-content {
+  display: flex;
   width: 100%;
-  max-width: 500px;
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  overflow-y: auto;
+  max-width: 1200px;
+  min-height: 600px;
   max-height: 90vh;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.left-pane {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.left-pane img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.right-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 40px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 h2 {
@@ -284,7 +277,35 @@ button:hover {
   min-width: 150px;
 }
 
+@media (max-width: 1024px) {
+  .register-content {
+    flex-direction: column;
+    max-height: none;
+  }
+
+  .left-pane {
+    display: none;
+  }
+
+  .right-pane {
+    width: 100%;
+    padding: 30px;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
+  .register-wrapper {
+    padding: 10px;
+  }
+
+  .right-pane {
+    padding: 20px;
+  }
+
   .flex-row {
     flex-direction: column;
   }
@@ -295,19 +316,26 @@ button:hover {
 }
 
 @media (max-width: 480px) {
-  .register-container {
-    padding: 20px;
+  .register-wrapper {
+    padding: 0;
   }
 
-  input, button {
-    padding: 10px;
+  .register-content {
+    border-radius: 0;
+    min-height: 100vh;
+  }
+
+  .right-pane {
+    padding: 20px 15px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  input,
+  button {
     font-size: 14px;
-  }
-
-  .radio-group {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
   }
 }
 </style>
