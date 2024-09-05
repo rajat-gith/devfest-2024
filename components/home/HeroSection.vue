@@ -3,7 +3,7 @@
     <v-row justify-center align="center">
       <v-col md="6" sm="6" cols="12">
         <h1 class="responsive-h1 my-4">
-          DevFest <br />
+          Cloud Community Day <br />
           {{ mainData.communityLocation.city }} 2024
         </h1>
         <p class="" :style="{ maxWidth: '90%' }">

@@ -41,7 +41,7 @@
           class="pa-8 text-center"
         >
           <v-img alt="image" style="width: 100%;margin: auto;" src="/assets/img/extra/logo-text.svg"></v-img>
-          <v-chip class="mt-n12" variant="outlined" color="black" style="background-color: white;">{{ mainData.communityLocation.city }}</v-chip>
+          <v-chip class="mt-" variant="outlined" color="black" style="background-color: white;">{{ mainData.communityLocation.city }}</v-chip>
           <v-img alt="image" style="width: 90%;margin: auto;" src="/assets/img/gdg-logo.svg"></v-img>
         </div>
       </v-col>
