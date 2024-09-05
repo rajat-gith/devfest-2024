@@ -1,25 +1,29 @@
 <template>
   <div class="login-wrapper">
-    <div class="bg_img"></div>
     <div class="login-container">
-      <h2>Login</h2>
-      <form @submit.prevent="handleLogin">
-        <div class="form-group">
-          <label for="username">Email:</label>
-          <input type="email" id="username" v-model="email" required />
+      <div class="image-pane">
+        <img src="public/img/common/profile_bg.webp" alt="Login background" />
+      </div>
+      <div class="form-pane">
+        <h2>Login</h2>
+        <form @submit.prevent="handleLogin">
+          <div class="form-group">
+            <label for="username">Email:</label>
+            <input type="email" id="username" v-model="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" v-model="password" required />
+          </div>
+          <button type="submit">Login</button>
+          <p v-if="message" class="message">{{ message }}</p>
+        </form>
+        <div class="register-link">
+          <p>
+            If you don't have an account,
+            <NuxtLink to="/auth/register">register here</NuxtLink>.
+          </p>
         </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" v-model="password" required />
-        </div>
-        <button type="submit">Login</button>
-        <p v-if="message" class="message">{{ message }}</p>
-      </form>
-      <div class="register-link">
-        <p>
-          If you don't have an account,
-          <NuxtLink to="/auth/register">register here</NuxtLink>.
-        </p>
       </div>
     </div>
   </div>
@@ -62,32 +66,55 @@ export default {
 </script>
 
 <style scoped>
+/* Container and wrapper for login */
 .login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url("public/img/common/profile_bg.webp") center/cover no-repeat;
+  /* background: url("public/img/common/profile_bg.webp") center/cover no-repeat; */
   padding: 20px;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .login-container {
+  display: flex;
   width: 100%;
-  max-width: 400px;
-  padding: 30px;
+  max-width: 900px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
+  overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.image-pane {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-pane img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-pane {
+  flex: 1;
+  padding: 40px;
+}
+
+/* Typography for the form */
 h2 {
   text-align: center;
   margin-bottom: 30px;
-  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
   color: #333;
 }
 
@@ -104,7 +131,7 @@ label {
 
 input {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 16px;
   box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -120,7 +147,7 @@ input:focus {
 
 button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background-color: #4285f4;
   color: #fff;
   border: none;
@@ -141,6 +168,7 @@ button:hover {
   margin-top: 15px;
 }
 
+/* Link section for register */
 .register-link {
   text-align: center;
   margin-top: 20px;
@@ -156,15 +184,47 @@ button:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 480px) {
+/* Media queries for responsiveness */
+@media (max-width: 1024px) {
+  .form-pane {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
   .login-container {
+    flex-direction: column;
+    max-width: 500px;
+  }
+
+  .image-pane {
+    display: none;
+  }
+
+  .form-pane {
     padding: 20px;
+  }
+
+  input,
+  button {
+    padding: 12px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-pane {
+    padding: 15px;
   }
 
   input,
   button {
     padding: 10px;
     font-size: 14px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
   }
 }
 </style>
