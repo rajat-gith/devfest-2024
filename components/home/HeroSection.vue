@@ -18,29 +18,58 @@
 
           <span class="mr-4">
             <v-icon class="mr-1">mdi-map-legend</v-icon>
-            <a :href="mainData.eventInfo.venue.map_link" target="_blank" style="color:black">
+            <a
+              :href="mainData.eventInfo.venue.map_link"
+              target="_blank"
+              style="color: black"
+            >
               {{ mainData.eventInfo.venue.address }}
             </a>
-            
           </span>
         </p>
 
-        <v-btn
-          rounded
-          size="large"
-          color="#FFD427"
-          v-if="
-            mainData.eventInfo &&
-            mainData.eventInfo.registeration.link.length &&
-            new Date(mainData.eventInfo.registeration.end_date) > new Date()
-          "
-          :href="mainData.eventInfo.registeration.link"
-          class="my-4 mt-3"
-          target="_blank"
-          style="border: 1.5px solid #1e1e1e; color: black"
-          variant="flat"
-          >Register Now</v-btn
-        >
+        <ClientOnly>
+          <template v-if="isLoggedIn">
+            <NuxtLink
+              to="/auth/profile"
+              class="d-md-flex d-lg-flex d-sm-flex d-none mr-3 no-decoration"
+              style="text-decoration: none"
+            >
+              <v-btn
+              rounded
+                size="large"
+                color="#FFD427"
+                class="my-4 mt-3"
+                style="border: 1.5px solid #1e1e1e; color: black"
+                variant="flat"
+              >
+                Explore
+              </v-btn>
+            </NuxtLink>
+          </template>
+          <template v-else>
+            <NuxtLink
+              v-if="
+                mainData &&
+                mainData.eventInfo.registeration.link.length &&
+                new Date(mainData.eventInfo.registeration.end_date) > new Date()
+              "
+              to="/auth/register"
+              class="d-md-flex d-lg-flex d-sm-flex d-none mr-3 no-decoration"
+              style="text-decoration: none"
+            >
+              <v-btn
+                rounded
+                size="large"
+                color="#FFD427"
+                class="my-4 mt-3"
+                style="border: 1.5px solid #1e1e1e; color: black"
+                variant="flat"
+                >Register Now
+              </v-btn>
+            </NuxtLink>
+          </template>
+        </ClientOnly>
       </v-col>
       <v-col md="6" sm="6" cols="12">
         <v-img
@@ -55,9 +84,19 @@
 
 <script setup>
 import { useDisplay } from "vuetify";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/firebase";
+
 const { width, mobile } = useDisplay();
 const screenWidth = ref(width);
 const { mainData } = useJSONData();
+
+const isLoggedIn = ref(false);
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    isLoggedIn.value = !!user; // Update isLoggedIn based on whether user is logged in
+  });
+});
 </script>
 
 <style scoped>

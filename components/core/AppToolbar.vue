@@ -6,7 +6,7 @@
     rounded="xl"
     color="#eeeeee"
   >
-  <v-app-bar-nav-icon
+    <v-app-bar-nav-icon
       class="d-md-none d-lg-none d-sm-flex d-flex"
       @click="drawerAction"
     ></v-app-bar-nav-icon>
@@ -45,45 +45,88 @@
     </div>
 
     <ClientOnly>
-      <v-btn
-        rounded
-        v-if="
-          mainData &&
-          mainData.eventInfo.registeration.link.length &&
-          new Date(mainData.eventInfo.registeration.end_date) > new Date()
-        "
-        :href="mainData.eventInfo.registeration.link"
-        class="d-md-flex d-lg-flex d-sm-flex d-none mr-3"
-        target="_blank"
-        color="#FFD427"
-        style="
-          border: 1.5px solid #1e1e1e;
-          color: black;
-          text-transform: capitalize;
-          font-weight: 100;
-        "
-        variant="flat"
-        >Register Now</v-btn
-      >
+      <template v-if="isLoggedIn">
+        <NuxtLink
+          to="/auth/profile"
+          class="d-md-flex d-lg-flex d-sm-flex d-none mr-3 no-decoration"
+          style="text-decoration: none"
+        >
+          <v-btn
+            rounded
+            color="#FFD427"
+            style="
+              border: 1.5px solid #1e1e1e;
+              color: black;
+              text-transform: capitalize;
+              text-decoration: none;
+              font-weight: 100;
+            "
+            variant="flat"
+          >
+            Profile
+          </v-btn>
+        </NuxtLink>
+      </template>
+      <template v-else>
+        <NuxtLink
+          v-if="
+            mainData &&
+            mainData.eventInfo.registeration.link.length &&
+            new Date(mainData.eventInfo.registeration.end_date) > new Date()
+          "
+          to="/auth/register"
+          class="d-md-flex d-lg-flex d-sm-flex d-none mr-3 no-decoration"
+          style="text-decoration: none"
+        >
+          <v-btn
+            rounded
+            color="#FFD427"
+            style="
+              border: 1.5px solid #1e1e1e;
+              color: black;
+              text-transform: capitalize;
+              text-decoration: none;
+              font-weight: 100;
+            "
+            variant="flat"
+          >
+            Register Now
+          </v-btn>
+        </NuxtLink>
+      </template>
     </ClientOnly>
-    
   </v-app-bar>
 </template>
 
 <script setup>
-import { useDisplay } from "vuetify";
+import { ref, onMounted } from 'vue';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useRouter } from 'vue-router';
+
+
 const { mainData, navbarData } = useJSONData();
 const sidebar = useSideBar();
-const { width, mobile } = useDisplay();
-
-const screenWidth = ref(width);
+const auth = getAuth();
+const router = useRouter();
+const isLoggedIn = ref(false);
 
 const drawerAction = () => {
   sidebar.value = !sidebar.value;
 };
+
+onMounted(() => {
+  onAuthStateChanged(auth, (user) => {
+    isLoggedIn.value = !!user;
+  });
+});
 </script>
 
 <style scoped>
+.v-card {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
 .toolbar-class {
   position: fixed;
   top: 0;
@@ -91,8 +134,9 @@ const drawerAction = () => {
   right: 0;
   z-index: 100;
   margin-bottom: 80px;
-  height: 64px; /* Set the height of the toolbar */
+  height: 64px;
 }
+
 /* Mobile breakpoint */
 @media (max-width: 700px) {
   .toolbar-class {
