@@ -14,7 +14,9 @@
     "firebase": "^10.13.0",
     "nuxt": "^3.12.4",
     "nuxt-gtag": "^3.0.1",
-    "vue": "latest"
+    "vue": "latest",
+    "vue-marquee-slider": "^1.0.6",
+    "vue-router": "^4.4.3"
   },
   "devDependencies": {
     "vite-plugin-vuetify": "^2.0.4",
