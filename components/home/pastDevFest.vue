@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row class="mb-0">
       <v-col md="12" sm="12" cols="12" class="text-center">
-        <h1>Last Year at DevFest</h1>
+        <h1>Cloud Community Day Bhubaneswar 2023</h1>
         <p>
           {{ mainData.eventInfo.pastDevFest.summery }}
         </p>
