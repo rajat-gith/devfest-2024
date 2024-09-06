@@ -302,15 +302,16 @@ onMounted(() => {
 
 <style scoped>
 .container {
-  width: 60vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
+
 .profile_container {
   display: flex;
   flex-direction: row;
-  max-width: 1200px;
   width: 100%;
   border-radius: 50px;
   margin: 20px auto;
@@ -373,10 +374,12 @@ onMounted(() => {
   background-color: #0077b5;
   color: white;
 }
+
 .github {
   background-color: #000;
   color: white;
 }
+
 .other {
   background-color: #fbbf00;
   color: black;
@@ -389,6 +392,10 @@ onMounted(() => {
 }
 
 @media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+
   .profile_container {
     flex-direction: column;
     border-radius: 25px;
@@ -404,6 +411,10 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+
   .profile_container {
     margin: 10px;
     border-radius: 15px;
@@ -414,18 +425,24 @@ onMounted(() => {
   }
 
   .social-buttons {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .social-btn {
-    width: 100%;
+    flex: 0 1 calc(33.333% - 0.5rem);
+    min-width: auto;
   }
 }
 
 @media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 0 10px;
+  }
+
   .profile_container {
     margin: 0;
-    width: 80%;
     border-radius: 0;
   }
 
@@ -436,6 +453,14 @@ onMounted(() => {
   .profile-card {
     padding: 1rem;
     border-radius: 0;
+  }
+
+  .social-buttons {
+    flex-direction: column;
+  }
+
+  .social-btn {
+    width: 100%;
   }
 }
 </style>
