@@ -159,6 +159,9 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware: "auth",
+});
 import { ref, onMounted } from "vue";
 import { signOut, onAuthStateChanged, updateProfile } from "firebase/auth";
 import {
@@ -191,7 +194,6 @@ const loading = ref(false);
 const error = ref(null);
 const router = useRouter();
 
-// Access Nuxt's injected Firebase services
 const { $auth, $firestore, $storage } = useNuxtApp();
 
 const loadUserProfile = async () => {
@@ -270,13 +272,11 @@ const saveProfile = async () => {
   }
 };
 
-// Cancel the edit and reload the profile
 const cancelEdit = () => {
   editMode.value = false;
   loadUserProfile();
 };
 
-// Logout function
 const handleLogout = async () => {
   try {
     await signOut($auth);
@@ -298,6 +298,7 @@ onMounted(() => {
     }
   });
 });
+
 </script>
 
 <style scoped>

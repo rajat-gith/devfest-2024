@@ -2,7 +2,7 @@
   <div class="login-wrapper">
     <div class="login-container">
       <div class="image-pane">
-        <img src="public/img/common/profile_bg.webp" alt="Login background" />
+        <img src="public/img/common/auth_bg.webp" alt="Login background" />
       </div>
       <div class="form-pane">
         <h2>Login</h2>

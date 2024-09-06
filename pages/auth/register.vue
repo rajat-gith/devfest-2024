@@ -3,7 +3,7 @@
     <div class="register-content">
       <!-- Left Pane with Optimized Image Size -->
       <div class="left-pane">
-        <img src="/img/common/profile_bg.webp" alt="Registration Image" />
+        <img src="/img/common/auth_bg.webp" alt="Registration Image" />
       </div>
 
       <!-- Right Pane with Scrollable Form -->
