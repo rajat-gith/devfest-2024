@@ -1,75 +1,75 @@
 [
   {
     "id": "101",
+    "name": "Ashita Prasad",
+    "company": {
+      "name": "API Dash",
+      "designation": "CTO"
+    },
+    "community_title": "Google Developer Expert in Dart & Flutter",
+    "image": "ashita.jpeg",
+    "bio": "WTM Ambassador; Join her session on Building AI Agents with Vertex AI and developing Agentic Flutter Apps to explore the future of AI-driven applications",
+    "social": {
+      "linkedin": "https://www.linkedin.com/posts/gdgcloudbbsr_cloudcommunityday-ccd-gdgbbsr-activity-7232734841652273152-ddm4?utm_source=share&utm_medium=member_android",
+      "twitter": "/",
+      "github": "/",
+      "web": "/"
+    }
+  },
+  {
+    "id": "102",
+    "name": "Imran Roshan",
+    "company": {
+      "name": "Deloitte",
+      "designation": "Senior Executive"
+    },
+    "community_title": "Google Developer Expert in GCP",
+    "image": "imran.jpeg",
+    "bio": "Google Cloud Champion Innovator in security & networking; Join his session on  Securing Kubernetes with Chaos. Don't miss out on this expert-led session filled with insights and strategies to safeguard your cloud infrastructure!",
+    "social": {
+      "linkedin": "https://www.linkedin.com/posts/gdgcloudbbsr_cloudcommunityday-ccd-gdgbbsr-activity-7233816283572486146-Q9X-?utm_source=share&utm_medium=member_android",
+      "twitter": "/",
+      "github": "/",
+      "web": "/"
+    }
+  },
+  {
+    "id": "103",
     "name": "Vrijraj Singh",
     "company": {
       "name": "agprop",
       "designation": "CTO"
     },
-    "community_title": "Google Developer Expert for Firebase",
-    "image": "vrijraj.jpg",
-    "bio": "Vrijraj is a dedicated CTO at agprop and a passionate advocate for community engagement. He actively contributes to the TechFerment community and holds the esteemed title of Google Developers Expert for Firebase and Web Technologies. With a wealth of experience, he has conducted over 300 talks and workshops, sharing his knowledge with various communities. Vrijraj's expertise lies in Web development, Firebase, Google Cloud Platform, and UI/UX Design. He possesses a strong drive for learning new technologies and leveraging them to build innovative solutions. Alongside his professional endeavors, Vrijraj takes pleasure in mentoring individuals and nurturing communities. During his leisure time, he indulges in his love for food and enjoys watching YouTube videos.",
+    "community_title": "Google Developer Expert in Firebase & Web Technologies",
+    "image": "vrijraj.jpeg",
+    "bio": "Join his session on 'GenAI with Firebase' as he dives into the fusion of Generative AI and Firebase, bringing innovative solutions to life. With his extensive expertise in Web, Firebase, GCP, and UI/UX Design, this session is a must-a enthusiasts.",
     "social": {
-      "linkedin": "https://www.linkedin.com/in/vrijrajsingh/",
-      "twitter": "https://twitter.com/SVrijraj",
-      "github": "https://github.com/vrijraj",
-      "web": "https://vrijraj.xyz/"
-    }
-  },
-  {
-    "id": "102",
-    "name": "Full Name",
-    "company": {
-      "name": "Company",
-      "designation": "Designation"
-    },
-    "community_title": "Community Title",
-    "image": "",
-    "bio": "Bio Section",
-    "social": {
-      "linkedin": "https://www.linkedin.com/in/vrijrajsingh/",
-      "twitter": "https://twitter.com/SVrijraj",
-      "github": "https://github.com/vrijraj",
-      "web": "https://vrijraj.xyz/"
-    }
-  },
-  {
-    "id": "103",
-    "name": "Full Name",
-    "company": {
-      "name": "Company",
-      "designation": "Designation"
-    },
-    "community_title": "Community Title",
-    "image": "",
-    "bio": "Bio Section",
-    "social": {
-      "linkedin": "https://www.linkedin.com/in/vrijrajsingh/",
-      "twitter": "https://twitter.com/SVrijraj",
-      "github": "https://github.com/vrijraj",
-      "web": "https://vrijraj.xyz/"
+      "linkedin": "https://www.linkedin.com/posts/gdgcloudbbsr_gdg-gdgbbsr-gdgcloudbbsr-activity-7234232406763819009--Qq3?utm_source=share&utm_medium=member_android",
+      "twitter": "/",
+      "github": "/",
+      "web": "/"
     }
   },
   {
     "id": "104",
-    "name": "Full Name",
+    "name": "Nirav Kothari",
     "company": {
-      "name": "Company",
-      "designation": "Designation"
+      "name": "Quantiphi",
+      "designation": "Senior Technical Architect"
     },
-    "community_title": "Community Title",
-    "image": "",
-    "bio": "Bio Section",
+    "community_title": "Google Developer Expert in Cloud Platform ",
+    "image": "nirav.jpeg",
+    "bio": "Google Developer Expert in Cloud Platform specializing in data management and warehousing;With two decades of experience under his belt, Nirav is passionate about sharing his extensive knowledge.Join us for his session on Enabling Data Analytics with Google Cloud and unlock the potential of data analytics in the cloud!",
     "social": {
-      "linkedin": "https://www.linkedin.com/in/vrijrajsingh/",
-      "twitter": "https://twitter.com/SVrijraj",
-      "github": "https://github.com/vrijraj",
-      "web": "https://vrijraj.xyz/"
+      "linkedin": "https://www.linkedin.com/posts/gdgcloudbbsr_gdgbbsr-gdgcloudbbsr-googlefordevelopers-activity-7236399891395010561-15eS?utm_source=share&utm_medium=member_android",
+      "twitter": "/",
+      "github": "/",
+      "web": "/"
     }
   },
   {
     "id": "105",
-    "name": "Full Name",
+    "name": "Dharmesh Vaya",
     "company": {
       "name": "Company",
       "designation": "Designation"
@@ -79,60 +79,10 @@
     "bio": "Bio Section",
     "social": {
       "linkedin": "https://www.linkedin.com/in/vrijrajsingh/",
-      "twitter": "https://twitter.com/SVrijraj",
-      "github": "https://github.com/vrijraj",
-      "web": "https://vrijraj.xyz/"
+      "twitter": "/",
+      "github": "/",
+      "web": "/"
     }
-  },
-  {
-    "id": "106",
-    "name": "Full Name",
-    "company": {
-      "name": "Company",
-      "designation": "Designation"
-    },
-    "community_title": "Community Title",
-    "image": "",
-    "bio": "Bio Section",
-    "social": {
-      "linkedin": "https://www.linkedin.com/in/vrijrajsingh/",
-      "twitter": "https://twitter.com/SVrijraj",
-      "github": "https://github.com/vrijraj",
-      "web": "https://vrijraj.xyz/"
-    }
-  },
-  {
-    "id": "107",
-    "name": "Full Name",
-    "company": {
-      "name": "Company",
-      "designation": "Designation"
-    },
-    "community_title": "Community Title",
-    "image": "",
-    "bio": "Bio Section",
-    "social": {
-      "linkedin": "https://www.linkedin.com/in/vrijrajsingh/",
-      "twitter": "https://twitter.com/SVrijraj",
-      "github": "https://github.com/vrijraj",
-      "web": "https://vrijraj.xyz/"
-    }
-  },
-  {
-    "id": "108",
-    "name": "Full Name",
-    "company": {
-      "name": "Company",
-      "designation": "Designation"
-    },
-    "community_title": "Community Title",
-    "image": "",
-    "bio": "Bio Section",
-    "social": {
-      "linkedin": "https://www.linkedin.com/in/vrijrajsingh/",
-      "twitter": "https://twitter.com/SVrijraj",
-      "github": "https://github.com/vrijraj",
-      "web": "https://vrijraj.xyz/"
-    }
+  
   }
 ]

@@ -1,43 +1,42 @@
 {
-  "communityName": "GDG London",
+  "communityName": "GDG Bhubaneswar",
   "communityLocation": {
-    "country": "United Kingdom",
-    "city": "London"
+    "country": "India",
+    "city": "Bhubaneswar"
   },
   "communityDescription": "GDG is an independent group; our activities and the opinions expressed here should in no way be linked to Google, the corporation.",
   "communityLinks": {
-    "page": "https://gdg.community.dev/gdg-london/",
-    "website": "https://gdg.community.dev/gdg-london/",
-    "instagram": "https://gdg.community.dev/gdg-london/",
-    "linkedin": "https://www.linkedin.com/company/google-developers-london/",
-    "youtube": "https://gdg.community.dev/gdg-london/"
+    "page": "https://gdg.community.dev/gdg-bhubaneswar/",
+    "website": "https://gdg.community.dev/gdg-bhubaneswar/",
+    "instagram": "https://www.instagram.com/gdgbbsr/",
+    "linkedin": "https://www.linkedin.com/company/gdg-bhubaneswar/"
   },
   "eventInfo": {
-    "name": "DevFest London 2024",
-    "date": "Nov 16, 2024",
+    "name": "Cloud Community Day",
+    "date": "Sep 29, 2024",
     "time": "9 AM - 5 PM IST",
     "venue": {
-      "address": "London",
-      "map_link": "https://maps.app.goo.gl/Cm6gXgpugNw74ow6A"
+      "address": "Hotel Padmaja Premium Bhubaneswar, Chandrasekharpur Branch",
+      "map_link": "https://maps.app.goo.gl/MX7cdkgKD1ZvGd9y8"
     },
     "registeration": {
       "link": "https://gdg.community.dev/",
       "end_date": "2024-10-25"
     },
     "description": {
-      "short": "An annual event hosted by the Google Developers Group across the world to bring the technology closer to the developers. It is an all day developer conference where we aim to focus on multiple technologies through lightning talks, sessions, workshops, etc.",
-      "long": "An annual event hosted by the Google Developers Group across the world to bring the technology closer to the developers. It is an all day developer conference where we aim to focus on multiple technologies through lightning talks, sessions, workshops, etc.An annual event hosted by the Google Developers Group across the world to bring the technology closer to the developers. It is an all day developer conference where we aim to focus on multiple technologies through lightning talks, sessions, workshops, etc."
+      "short": "The Cloud Community Day is a flagship event hosted by Google Developer Groups (GDG), focusing on cloud technologies and related innovations. It typically brings together cloud enthusiasts, developers, tech professionals, and companies to share insights, trends, and advancements in cloud computing.",
+      "long": "The Cloud Community Day is a flagship event hosted by Google Developer Groups (GDG), focusing on cloud technologies and related innovations. It typically brings together cloud enthusiasts, developers, tech professionals, and companies to share insights, trends, and advancements in cloud computing.GDGs across various cities host *Cloud Community Day*, making it a global phenomenon with local impacts. It provides a space for cloud enthusiasts to stay updated with the latest innovations and connect with the broader Google Cloud ecosystem."
     },
     "stats": [
       {
         "name": "Speakers",
-        "value": "23+",
+        "value": "5",
         "color": "#C3ECF6",
         "image": "img/common/blue.png"
       },
       {
         "name": "Participants",
-        "value": "200+",
+        "value": "300+",
         "color": "#F8D8D8",
         "image": "img/common/pink.png"
       },
@@ -56,29 +55,29 @@
     ],
     "whatToExpect": [
       {
-        "title": "Technical content",
-        "description": "Events hosted by the Google Developer Groups community, featuring leading experts on Google technologies in areas."
+        "title": "Expert Talks and Panels",
+        "description": "Sessions led by Google Cloud experts & industry leaders strengthening the cloud community by encouraging knowledge sharing and collaboration."
       },
       {
-        "title": "Technical content",
-        "description": "Events hosted by the Google Developer Groups community, featuring leading experts on Google technologies in areas."
+        "title": "Workshops and Demos",
+        "description": "Hands-on workshops and live demonstrations of cloud products and services, giving participants a chance to experience cloud tools in action."
       },
       {
-        "title": "Technical content",
-        "description": "Events hosted by the Google Developer Groups community, featuring leading experts on Google technologies in areas."
+        "title": "Networking Opportunities",
+        "description": "A platform for attendees to connect with peers, cloud experts, and potential employers, fostering collaboration within the tech community."
       }
     ],
     "pastDevFest": {
-      "summery": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente amet asperiores unde. Adipisci nobis ipsum fuga amet? Ut, iusto tenetur quisquam neque consectetur impedit magnam unde harum a mollitia possimus? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores laborum ut praesentium architecto a. Recusandae neque deserunt saepe mollitia quibusdam a nihil dicta in, totam hic molestias eaque. Dolores, nisi.",
-      "images": ["image-1.png", "image-2.png", "image-3.png"],
+      "summery": "With 5 expert speakers from around the globe and 300+ enthusiastic attendees, the event truly transformed into a tech hub. From insightful sessions on cloud innovations to meaningful networking opportunities, participants gained valuable knowledge and connections. The energy in the room was contagious, as everyone shared their passion for cloud technologies. It was more than just talks—hands-on experiences, collaborative discussions, and new ideas emerged, making this edition a massive success. We look forward to host more groundbreaking events like this!",
+      "images": ["image-1.jpg", "image-2.jpg", "image-3.jpg"],
       "stats": [
         {
           "name": "Speakers",
-          "value": "23+"
+          "value": "5"
         },
         {
           "name": "Participants",
-          "value": "200+"
+          "value": "300+"
         },
         {
           "name": "Sessions",
@@ -92,7 +91,7 @@
     }
   },
   "seo": {
-    "keywords": "GDG, DevFest, Google, DevFest",
-    "hostUrl": "https://devfest-app-2024.web.app"
+    "keywords": "GDG, Cloud Community Day, Google, CCD",
+    "hostUrl": "/"
   }
 }

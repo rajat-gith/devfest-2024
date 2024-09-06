@@ -23,4 +23,4 @@ logs
 .env.*
 !.env.example
 
-firebase.config.js
+# firebase.config.js
