@@ -168,6 +168,7 @@ import {
   where,
   updateDoc,
   doc,
+  getDoc
 } from "firebase/firestore";
 import {
   getStorage,
@@ -196,17 +197,15 @@ const loadUserProfile = async () => {
   if (auth.currentUser) {
     try {
       const uid = auth.currentUser.uid;
-      const userCollectionRef = collection(db, "users");
-      const userQuery = query(userCollectionRef, where("uid", "==", uid));
-      const querySnapshot = await getDocs(userQuery);
+      const userDocRef = doc(db, "users", uid);
+      const docSnap = await getDoc(userDocRef);
 
-      if (!querySnapshot.empty) {
-        const docSnap = querySnapshot.docs[0];
+      if (docSnap.exists()) {
         userProfile.value = docSnap.data();
         console.log(userProfile);
       } else {
-        console.error("No matching document found!");
-        error.value = "No matching document found!";
+        console.error("No such document!");
+        error.value = "User profile not found!";
       }
     } catch (err) {
       console.error("Error fetching user data:", err);
@@ -235,43 +234,32 @@ const saveProfile = async () => {
       userProfile.value.photoURL = photoURL;
     }
 
-    // Query the user's document in Firestore
-    const userCollectionRef = collection(db, "users");
-    const userQuery = query(userCollectionRef, where("uid", "==", uid));
-    const querySnapshot = await getDocs(userQuery);
+    const userDocRef = doc(db, "users", uid);
 
-    if (!querySnapshot.empty) {
-      const docSnap = querySnapshot.docs[0];
-      const userDocRef = doc(db, "users", docSnap.id);
+    // Prepare the update data
+    const updateData = {
+      name: userProfile.value.name,
+      phone: userProfile.value.phone,
+      linkedin: userProfile.value.linkedin,
+      github: userProfile.value.github,
+      website: userProfile.value.website,
+    };
 
-      // Prepare the update data
-      const updateData = {
-        name: userProfile.value.name,
-        phone: userProfile.value.phone,
-        linkedin: userProfile.value.linkedin,
-        github: userProfile.value.github,
-        website: userProfile.value.website,
-      };
-
-      // Only add photoURL if it is defined
-      if (photoURL) {
-        updateData.photoURL = photoURL;
-      }
-
-      // Update the user document in Firestore
-      await updateDoc(userDocRef, updateData);
-
-      // Update Firebase Authentication profile
-      await updateProfile(auth.currentUser, {
-        displayName: userProfile.value.name,
-        photoURL,
-      });
-
-      editMode.value = false; // Exit edit mode
-    } else {
-      console.error("No matching document found!");
-      alert("No matching document found!");
+    // Only add photoURL if it is defined
+    if (photoURL) {
+      updateData.photoURL = photoURL;
     }
+
+    // Update the user document in Firestore
+    await updateDoc(userDocRef, updateData);
+
+    // Update Firebase Authentication profile
+    await updateProfile(auth.currentUser, {
+      displayName: userProfile.value.name,
+      photoURL,
+    });
+
+    editMode.value = false; // Exit edit mode
   } catch (err) {
     console.error("Error updating profile:", err);
     alert("Error updating profile.");
@@ -281,6 +269,7 @@ const saveProfile = async () => {
     profileImage.value = null;
   }
 };
+
 
 // Cancel the edit and reload the profile
 const cancelEdit = () => {
@@ -335,7 +324,6 @@ onMounted(() => {
   min-height: 300px;
   background: url("public/img/common/profile_bg.png") center/cover no-repeat;
 }
- 
 
 .profile-card {
   flex: 1;

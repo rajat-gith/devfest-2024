@@ -13,11 +13,23 @@
           <form @submit.prevent="handleRegister" class="register-form">
             <div class="form-group">
               <label for="name">Name:</label>
-              <input type="text" id="name" v-model="name" required />
+              <input
+                type="text"
+                id="name"
+                v-model="name"
+                required
+                :disabled="isLoading"
+              />
             </div>
             <div class="form-group">
               <label for="email">Email:</label>
-              <input type="email" id="email" v-model="email" required />
+              <input
+                type="email"
+                id="email"
+                v-model="email"
+                required
+                :disabled="isLoading"
+              />
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
@@ -26,11 +38,18 @@
                 id="password"
                 v-model="password"
                 required
+                :disabled="isLoading"
               />
             </div>
             <div class="form-group">
               <label for="phone">Phone Number:</label>
-              <input type="tel" id="phone" v-model="phone" required />
+              <input
+                type="tel"
+                id="phone"
+                v-model="phone"
+                required
+                :disabled="isLoading"
+              />
             </div>
             <div class="form-group">
               <label>Are you a:</label>
@@ -41,6 +60,7 @@
                     id="student"
                     value="student"
                     v-model="userType"
+                    :disabled="isLoading"
                   />
                   <label for="student">Student</label>
                 </div>
@@ -50,6 +70,7 @@
                     id="professional"
                     value="professional"
                     v-model="userType"
+                    :disabled="isLoading"
                   />
                   <label for="professional">Professional</label>
                 </div>
@@ -59,11 +80,21 @@
               <div class="flex-row">
                 <div class="flex-item">
                   <label for="companyName">Company Name:</label>
-                  <input type="text" id="companyName" v-model="companyName" />
+                  <input
+                    type="text"
+                    id="companyName"
+                    v-model="companyName"
+                    :disabled="isLoading"
+                  />
                 </div>
                 <div class="flex-item">
                   <label for="designation">Designation:</label>
-                  <input type="text" id="designation" v-model="designation" />
+                  <input
+                    type="text"
+                    id="designation"
+                    v-model="designation"
+                    :disabled="isLoading"
+                  />
                 </div>
               </div>
             </div>
@@ -72,19 +103,37 @@
               <div class="flex-row">
                 <div class="flex-item">
                   <label for="linkedin">LinkedIn:</label>
-                  <input type="url" id="linkedin" v-model="linkedin" />
+                  <input
+                    type="url"
+                    id="linkedin"
+                    v-model="linkedin"
+                    :disabled="isLoading"
+                  />
                 </div>
                 <div class="flex-item">
                   <label for="github">GitHub:</label>
-                  <input type="url" id="github" v-model="github" />
+                  <input
+                    type="url"
+                    id="github"
+                    v-model="github"
+                    :disabled="isLoading"
+                  />
                 </div>
               </div>
             </div>
             <div class="form-group">
               <label for="website">Other Website:</label>
-              <input type="url" id="website" v-model="website" />
+              <input
+                type="url"
+                id="website"
+                v-model="website"
+                :disabled="isLoading"
+              />
             </div>
-            <button type="submit">Register</button>
+            <button type="submit" :disabled="isLoading">
+              <span v-if="!isLoading">Register</span>
+              <div v-else class="loader"></div>
+            </button>
           </form>
           <p class="redirect-link">
             Already registered?
@@ -98,6 +147,12 @@
 </template>
 
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+
+
+
+
 export default {
   data() {
     return {
@@ -112,13 +167,55 @@ export default {
       github: "",
       website: "",
       error: "",
+      isLoading: false,
     };
   },
   methods: {
-    handleRegister() {
-      // Implement registration logic here
-      console.log("Registering user:", this.name, this.email);
-      // Add API call or Vuex action to handle registration
+    async handleRegister() {
+      this.isLoading = true;
+      this.error = "";
+
+      try {
+        const auth = getAuth();
+        const db = getFirestore();
+
+        // Create user in Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          this.email,
+          this.password
+        );
+        const user = userCredential.user;
+
+        // Prepare user data for Firestore
+        const userData = {
+          name: this.name,
+          email: this.email,
+          phone: this.phone,
+          userType: this.userType,
+          linkedin: this.linkedin,
+          github: this.github,
+          website: this.website,
+        };
+
+        if (this.userType === "professional") {
+          userData.companyName = this.companyName;
+          userData.designation = this.designation;
+        }
+
+        // Save user data in Firestore
+        await setDoc(doc(db, "users", user.uid), userData);
+
+        // Registration successful
+        console.log("User registered successfully:", user.uid);
+        // Redirect to dashboard or show success message
+        this.$router.push("/");
+      } catch (error) {
+        console.error("Error registering user:", error);
+        this.error = error.message;
+      } finally {
+        this.isLoading = false;
+      }
     },
   },
 };
@@ -132,7 +229,6 @@ export default {
   min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
-  /* background-color: #f4f4f9; */
 }
 
 .register-content {
@@ -275,6 +371,35 @@ button:hover {
 .flex-item {
   flex: 1 1 calc(50% - 7.5px);
   min-width: 150px;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #28a745;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
 }
 
 @media (max-width: 1024px) {

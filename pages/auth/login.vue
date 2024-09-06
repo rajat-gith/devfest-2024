@@ -9,13 +9,28 @@
         <form @submit.prevent="handleLogin">
           <div class="form-group">
             <label for="username">Email:</label>
-            <input type="email" id="username" v-model="email" required />
+            <input
+              type="email"
+              id="username"
+              v-model="email"
+              required
+              :disabled="isLoading"
+            />
           </div>
           <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" v-model="password" required />
+            <input
+              type="password"
+              id="password"
+              v-model="password"
+              required
+              :disabled="isLoading"
+            />
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" :disabled="isLoading">
+            <span v-if="!isLoading">Login</span>
+            <div v-else class="loader"></div>
+          </button>
           <p v-if="message" class="message">{{ message }}</p>
         </form>
         <div class="register-link">
@@ -42,8 +57,12 @@ export default {
     const email = ref("");
     const password = ref("");
     const message = ref("");
+    const isLoading = ref(false);
 
     const handleLogin = async () => {
+      isLoading.value = true;
+      message.value = "";
+
       try {
         await signInWithEmailAndPassword(auth, email.value, password.value);
         console.log("User logged in successfully.");
@@ -52,6 +71,8 @@ export default {
       } catch (err) {
         message.value = "Invalid credentials. Please try again.";
         console.error("Error logging in:", err);
+      } finally {
+        isLoading.value = false;
       }
     };
 
@@ -59,6 +80,7 @@ export default {
       email,
       password,
       message,
+      isLoading,
       handleLogin,
     };
   },
@@ -226,5 +248,33 @@ button:hover {
   h2 {
     font-size: 1.5rem;
   }
+}
+.loader {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+input:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
 }
 </style>
