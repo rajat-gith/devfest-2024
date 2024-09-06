@@ -11,6 +11,8 @@ const app =
     ? initializeApp(firebaseConfig)
     : alreadyCreatedApps[0];
 
+console.log(firebaseConfig,app)
+
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
