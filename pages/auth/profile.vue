@@ -168,16 +168,14 @@ import {
   where,
   updateDoc,
   doc,
-  getDoc
+  getDoc,
 } from "firebase/firestore";
 import {
-  getStorage,
   ref as storageRef,
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
 import { useRouter } from "vue-router";
-import { auth, db } from "@/firebase";
 
 const userProfile = ref({
   name: "",
@@ -193,11 +191,14 @@ const loading = ref(false);
 const error = ref(null);
 const router = useRouter();
 
+// Access Nuxt's injected Firebase services
+const { $auth, $firestore, $storage } = useNuxtApp();
+
 const loadUserProfile = async () => {
-  if (auth.currentUser) {
+  if ($auth.currentUser) {
     try {
-      const uid = auth.currentUser.uid;
-      const userDocRef = doc(db, "users", uid);
+      const uid = $auth.currentUser.uid;
+      const userDocRef = doc($firestore, "users", uid);
       const docSnap = await getDoc(userDocRef);
 
       if (docSnap.exists()) {
@@ -220,13 +221,12 @@ const saveProfile = async () => {
   loading.value = true;
 
   try {
-    const uid = auth.currentUser.uid;
+    const uid = $auth.currentUser.uid;
 
     // If a new image is selected, upload it to Firebase Storage
     let photoURL = userProfile.value.photoURL;
     if (profileImage.value) {
-      const storage = getStorage();
-      const imageRef = storageRef(storage, `profileImages/${uid}`);
+      const imageRef = storageRef($storage, `profileImages/${uid}`);
       await uploadBytes(imageRef, profileImage.value);
       photoURL = await getDownloadURL(imageRef);
 
@@ -234,7 +234,7 @@ const saveProfile = async () => {
       userProfile.value.photoURL = photoURL;
     }
 
-    const userDocRef = doc(db, "users", uid);
+    const userDocRef = doc($firestore, "users", uid);
 
     // Prepare the update data
     const updateData = {
@@ -254,7 +254,7 @@ const saveProfile = async () => {
     await updateDoc(userDocRef, updateData);
 
     // Update Firebase Authentication profile
-    await updateProfile(auth.currentUser, {
+    await updateProfile($auth.currentUser, {
       displayName: userProfile.value.name,
       photoURL,
     });
@@ -270,7 +270,6 @@ const saveProfile = async () => {
   }
 };
 
-
 // Cancel the edit and reload the profile
 const cancelEdit = () => {
   editMode.value = false;
@@ -280,7 +279,7 @@ const cancelEdit = () => {
 // Logout function
 const handleLogout = async () => {
   try {
-    await signOut(auth);
+    await signOut($auth);
     localStorage.setItem("isLogin", "false");
     router.push("/auth/login");
   } catch (error) {
@@ -290,7 +289,7 @@ const handleLogout = async () => {
 };
 
 onMounted(() => {
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged($auth, (user) => {
     if (user) {
       loadUserProfile(user.uid);
     } else {
@@ -300,6 +299,7 @@ onMounted(() => {
   });
 });
 </script>
+
 <style scoped>
 .container {
   width: 60vw;

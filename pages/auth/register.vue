@@ -147,11 +147,8 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-
-
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 export default {
   data() {
@@ -176,12 +173,12 @@ export default {
       this.error = "";
 
       try {
-        const auth = getAuth();
-        const db = getFirestore();
+        // Access Nuxt's injected Firebase services
+        const { $auth, $firestore } = useNuxtApp();
 
         // Create user in Firebase Authentication
         const userCredential = await createUserWithEmailAndPassword(
-          auth,
+          $auth,
           this.email,
           this.password
         );
@@ -204,7 +201,7 @@ export default {
         }
 
         // Save user data in Firestore
-        await setDoc(doc(db, "users", user.uid), userData);
+        await setDoc(doc($firestore, "users", user.uid), userData);
 
         // Registration successful
         console.log("User registered successfully:", user.uid);

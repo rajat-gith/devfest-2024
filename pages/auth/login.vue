@@ -47,7 +47,6 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { auth } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
@@ -59,12 +58,16 @@ export default {
     const message = ref("");
     const isLoading = ref(false);
 
+    // Accessing Nuxt App context to get Firebase services
+    const { $auth } = useNuxtApp(); // Use the injected Firebase auth service
+
     const handleLogin = async () => {
       isLoading.value = true;
       message.value = "";
 
       try {
-        await signInWithEmailAndPassword(auth, email.value, password.value);
+        // Use $auth for authentication
+        await signInWithEmailAndPassword($auth, email.value, password.value);
         console.log("User logged in successfully.");
         router.push("/");
         localStorage.setItem("isLogin", true);
