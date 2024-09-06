@@ -28,48 +28,46 @@
           </span>
         </p>
 
-        <ClientOnly>
-          <template v-if="isLoggedIn">
-            <NuxtLink
-              to="/auth/profile"
-              class="d-md-flex d-lg-flex d-sm-flex d-none mr-3 no-decoration"
-              style="text-decoration: none"
-            >
-              <v-btn
+        <template v-if="isLoggedIn">
+          <NuxtLink
+            to="/auth/profile"
+            class="d-flex mr-3 no-decoration"
+            style="text-decoration: none"
+          >
+            <v-btn
               rounded
-                size="large"
-                color="#FFD427"
-                class="my-4 mt-3"
-                style="border: 1.5px solid #1e1e1e; color: black"
-                variant="flat"
-              >
-                Explore
-              </v-btn>
-            </NuxtLink>
-          </template>
-          <template v-else>
-            <NuxtLink
-              v-if="
-                mainData &&
-                mainData.eventInfo.registeration.link.length &&
-                new Date(mainData.eventInfo.registeration.end_date) > new Date()
-              "
-              to="/auth/register"
-              class="d-md-flex d-lg-flex d-sm-flex d-none mr-3 no-decoration"
-              style="text-decoration: none"
+              size="large"
+              color="#FFD427"
+              class="my-4 mt-3"
+              style="border: 1.5px solid #1e1e1e; color: black"
+              variant="flat"
             >
-              <v-btn
-                rounded
-                size="large"
-                color="#FFD427"
-                class="my-4 mt-3"
-                style="border: 1.5px solid #1e1e1e; color: black"
-                variant="flat"
-                >Register Now
-              </v-btn>
-            </NuxtLink>
-          </template>
-        </ClientOnly>
+              Explore
+            </v-btn>
+          </NuxtLink>
+        </template>
+        <template v-else>
+          <NuxtLink
+            v-if="
+              mainData &&
+              mainData.eventInfo.registeration.link.length &&
+              new Date(mainData.eventInfo.registeration.end_date) > new Date()
+            "
+            to="/auth/register"
+            class="d-flex mr-3 no-decoration"
+            style="text-decoration: none"
+          >
+            <v-btn
+              rounded
+              size="large"
+              color="#FFD427"
+              class="my-4 mt-3"
+              style="border: 1.5px solid #1e1e1e; color: black"
+              variant="flat"
+              >Register Now
+            </v-btn>
+          </NuxtLink>
+        </template>
       </v-col>
       <v-col md="6" sm="6" cols="12">
         <v-img
